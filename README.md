@@ -1,50 +1,105 @@
-# ASPnetGeneric
+
+<h1>ASPnetGeneric</h1>
 Learning from zero to hero - here we go again!
 
-#Download DOTNET SDK
+<h3>Download DOTNET SDK</h3>
 https://dotnet.microsoft.com/en-us/download/dotnet
 
 
-#Habilitar https, confiando en los certificados -- POWER SHELL
+<h3>Habilitar https, confiando en los certificados -- POWER SHELL</h3>
 dotnet dev-certs https --trust
 
 #Si no funciona
 Primero Instala dotnet-sdk de la pagina https://dotnet.microsoft.com/download
 Luego
 En PowerShell ejecutas
+dotnet dev-certs https --trust  <br>
 dotnet tool install --global dotnet-dev-certs
-dotnet dev-certs https --trust
 
-Razor Page 										page
-MVC ViewImports 								viewimports
-MVC ViewStart 									viewstart
-ASP.NET Core Empty 								web
-ASP.NET Core Web App (Model-View-Controller) 	mvc
-ASP.NET Core Web App 							razor
-ASP.NET Core with Angular 						angular
-ASP.NET Core with React.js 						react
-ASP.NET Core with React.js and Redux 			reactredux
-Razor Class 									Library
-razorclasslib
-ASP.NET Core Web API 							webapi
+<table>
+    <thead>
+        <tr>
+            <th>Razor Page </th>
+            <th>page</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>MVC ViewImports </td>
+            <td>viewimports</td>
+        </tr>
+        <tr>
+            <td>MVC ViewStart </td>
+            <td>viewstart</td>
+        </tr>
+        <tr>
+            <td>ASP.NET Core Empty </td>
+            <td>web</td>
+        </tr>
+        <tr>
+            <td>ASP.NET Core Web App (Model-View-Controller)</td>
+            <td>mvc</td>
+        </tr>
+        <tr>
+            <td>ASP.NET Core Web App</td>
+            <td>razor</td>
+        </tr>
+        <tr>
+            <td>ASP.NET Core with Angular </td>
+            <td>angular</td>
+        </tr>
+        <tr>
+            <td>ASP.NET Core with React.js 	</td>
+            <td>react</td>
+        </tr>
+        <tr>
+            <td>ASP.NET Core with React.js and Redux </td>
+            <td>reactredux</td>
+        </tr>
+        <tr>
+            <td>Razor Class Library</td>
+            <td>razorclasslib</td>
+        </tr>
+        <tr>
+            <td>ASP.NET Core Web API </td>
+            <td>webapi</td>
+        </tr>
+    </tbody>
+</table>					
+								
+									
+								
+ 	
+ 							
+						
+					
+			
 
 
-#Agregar paquetes!		
-dotnet add package Newtonsoft.Json
+<h2>#Comandos de CONSOLA:  </h2>
+
+<ul>
+    <li>dotnet run</li>
+    <li>dotnet restore</li>
+    <li>dotnet add package Newtonsoft.Json    </li>
+    <li>dotnet new console -o ProjectName</li>
+    <li>code . </li>
+    <li>dotnet watch run</li>
+    <li>dotnet new mvc -au none -o projectName</li>
+    <li>dotnet dev-certs https --trust</li>
+    <li>dotnet tool install --global dotnet-dev-certs</li>
+</ul>
 
 
-#Comandos de CONSOLA:  
-dotnet run
-dotnet restore
-dotnet new console -o ProjectName
-code . 
-dotnet new mvc -au none -o projectName
-dotnet watch run
 
 
-#Useful Link for EntityFramework   https://www.learnentityframeworkcore.com/
+<h2>#Useful Links</h2>
+ <ul>
+     <li>https://www.learnentityframeworkcore.com/</li>
+ </ul>
 
-##Providers Actuales para EF Core
+
+<h2>##Providers Actuales para EF Core</h2>
 
 <table >
     <thead >

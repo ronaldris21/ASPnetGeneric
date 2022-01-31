@@ -187,3 +187,11 @@ dotnet tool install --global dotnet-dev-certs
 		</tr>
     </tbody>
 </table>
+
+
+<h2>Work with databases</h2>
+<ul>
+	<li>dotnet add package Microsoft.EntityFrameworkCore.InMemory </li>
+	<li>dotnet add package Microsoft.EntityFrameworkCore.SqlServer </li>
+</ul>
+

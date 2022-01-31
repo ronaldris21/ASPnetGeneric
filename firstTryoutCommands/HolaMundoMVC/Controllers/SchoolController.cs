@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using HolaMundoMVC.Models;
 using System;
+using System.Collections.Generic;
 
 namespace HolaMundoMVC
 {
@@ -15,16 +16,22 @@ namespace HolaMundoMVC
 
         public IActionResult Index()
         {
-            School oSchool  = new School()
+            Escuela oSchool  = new Escuela()
             {
-                FoundationYear = 2005,
-                SchoolId = Guid.NewGuid().ToString(),
-                Name = "Leopoldo Mayen Torres"
+                AnoDeCreacion = 2005,
+                UniqueId = Guid.NewGuid().ToString(),
+                Nombre = "Leopoldo Mayen Torres",
+                Direccion = "Santa Ana",
+                Pais = "El Salvador",
+                Ciudad = "Santa Ana",
+                TipoEscuela = TiposEscuela.Secundaria
             };
+
+            ViewBag.usernameDynamic = "RonaldRis21";
+            ViewBag.date =System.DateTime.Now;
             
             return View(oSchool);
         }
 
-        
     }
 }

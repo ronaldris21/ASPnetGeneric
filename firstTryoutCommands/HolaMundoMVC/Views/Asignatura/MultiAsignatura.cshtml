@@ -1,0 +1,30 @@
+
+
+@model IEnumerable<Asignatura>
+
+@{
+    ViewData["Title"] = "Informacion Asignatura";
+    Layout = "_Layout2";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Identificador</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var asignatura in Model)
+        {
+            <tr>
+                <td>@asignatura.Nombre</td>
+                <td>@asignatura.UniqueId</td>
+            </tr>
+        }
+        
+    </tbody>
+</table>
+

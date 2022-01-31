@@ -39,4 +39,31 @@ dotnet restore
 dotnet new console -o ProjectName
 code . 
 dotnet new mvc -au none -o projectName
-dotnet watch
+dotnet watch run
+
+
+#Useful Link for EntityFramework   https://www.learnentityframeworkcore.com/
+
+##Providers Actuales para EF Core
+
+
+|NuGet Package| Supported database engines|
+|Microsoft.EntityFrameworkCore.SqlServer |SQL Server 2008 onwards|
+|Microsoft.EntityFrameworkCore.Sqlite |SQLite 3.7 onwards|
+|Microsoft.EntityFrameworkCore.InMemory |EF Core in-memory database|
+|Npgsql.EntityFrameworkCore.PostgreSQL |PostgreSQL|
+|Pomelo.EntityFrameworkCore.MySql |MySQL, MariaDB|
+|Pomelo.EntityFrameworkCore.MyCat |MyCAT Server|
+|EntityFrameworkCore.SqlServerCompact40 |SQL Server Compact 4.0|
+|EntityFrameworkCore.SqlServerCompact35 |SQL Server Compact 3.5|
+|MySql.Data.EntityFrameworkCore |MySQL|
+|FirebirdSql.EntityFrameworkCore.Firebird |Firebird 2.5 and 3.x|
+|EntityFrameworkCore.FirebirdSql |Firebird 2.5 and 3.x|
+|IBM.EntityFrameworkCore |Db2, Informix|
+|IBM.EntityFrameworkCore-lnx |Db2, Informix|
+|IBM.EntityFrameworkCore-osx |Db2, Informix|
+|Devart.Data.Oracle.EFCore |Oracle 9.2.0.4 onwards|
+|Devart.Data.PostgreSql.EFCore |PostgreSQL 8.0 onwards|
+|Devart.Data.SQLite.EFCore |SQLite 3 onwards|
+|Devart.Data.MySql.EFCore |MySQL 5 onwards|
+|EntityFrameworkCore.Jet |Microsoft Access files|

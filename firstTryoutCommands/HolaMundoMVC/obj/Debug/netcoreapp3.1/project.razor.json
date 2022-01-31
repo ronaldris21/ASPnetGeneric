@@ -14407,6 +14407,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\Shared\\_Layout2.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout2.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
@@ -14427,6 +14432,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\Asignatura\\Index.cshtml",
+      "TargetPath": "Views\\Asignatura\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\School\\index.cshtml",
       "TargetPath": "Views\\School\\index.cshtml",
       "FileKind": "mvc"
@@ -14437,8 +14447,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\Shared\\asignaturaSimple.cshtml",
+      "TargetPath": "Views\\Shared\\asignaturaSimple.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\Asignatura\\MultiAsignatura.cshtml",
+      "TargetPath": "Views\\Asignatura\\MultiAsignatura.cshtml",
       "FileKind": "mvc"
     }
   ],

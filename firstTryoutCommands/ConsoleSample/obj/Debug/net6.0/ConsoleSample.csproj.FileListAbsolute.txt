@@ -1,0 +1,17 @@
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\bin\Debug\net6.0\ConsoleSample.exe
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\bin\Debug\net6.0\ConsoleSample.deps.json
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\bin\Debug\net6.0\ConsoleSample.runtimeconfig.json
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\bin\Debug\net6.0\ConsoleSample.dll
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\bin\Debug\net6.0\ref\ConsoleSample.dll
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\bin\Debug\net6.0\ConsoleSample.pdb
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.csproj.AssemblyReference.cache
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.AssemblyInfoInputs.cache
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.AssemblyInfo.cs
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.csproj.CoreCompileInputs.cache
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.dll
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ref\ConsoleSample.dll
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.pdb
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.genruntimeconfig.cache
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\ConsoleSample\obj\Debug\net6.0\ConsoleSample.csproj.CopyComplete

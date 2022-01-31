@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "McCQZjbEzLgky/mIksBCSRrbqVMhSU9Bcp+wYT8Tfa3vAYpXKyTJq0BQqV3nxevfnrAGIvXdoqbXhty9aWqj+A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\HolaMundoMVC.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\286407\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+  ],
+  "logs": []
+}

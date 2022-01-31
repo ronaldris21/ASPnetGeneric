@@ -29,5 +29,14 @@ razorclasslib
 ASP.NET Core Web API 							webapi
 
 
-#Agregar paquetes!
+#Agregar paquetes!		
 dotnet add package Newtonsoft.Json
+
+
+#Comandos de CONSOLA:  
+dotnet run
+dotnet restore
+dotnet new console -o ProjectName
+code . 
+dotnet new mvc -au none -o projectName
+dotnet watch

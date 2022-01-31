@@ -36,3 +36,4 @@ C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\HolaMundoMVC\obj\Debug
 C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\HolaMundoMVC\obj\Debug\netcoreapp3.1\HolaMundoMVC.pdb
 C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\HolaMundoMVC\obj\Debug\netcoreapp3.1\HolaMundoMVC.genruntimeconfig.cache
 C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\HolaMundoMVC\obj\Debug\netcoreapp3.1\HolaMundoMVC.csproj.CopyComplete
+C:\Users\286407\Desktop\ASPnetGeneric\firstTryoutCommands\HolaMundoMVC\obj\Debug\netcoreapp3.1\Razor\Views\School\index.cshtml.g.cs

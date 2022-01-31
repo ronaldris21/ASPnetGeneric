@@ -11,7 +11,6 @@ namespace ConsoleSample
         
         public static  void Main(String[] args)
         {
-            
             Console.WriteLine("Hello, World!");
 
             string API_URL = "https://jsonplaceholder.typicode.com/posts?_limit=10";
@@ -23,7 +22,7 @@ namespace ConsoleSample
             {
                 System.Console.WriteLine(post.id + " - " + post.title);
             }
-
+            Console.ReadKey();
         }
         
     }

@@ -14427,6 +14427,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\School\\index.cshtml",
+      "TargetPath": "Views\\School\\index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "c:\\Users\\286407\\Desktop\\ASPnetGeneric\\firstTryoutCommands\\HolaMundoMVC\\Views\\Home\\Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"

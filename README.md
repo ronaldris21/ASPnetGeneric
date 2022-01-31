@@ -46,24 +46,89 @@ dotnet watch run
 
 ##Providers Actuales para EF Core
 
-
-|NuGet Package| Supported database engines|
-|Microsoft.EntityFrameworkCore.SqlServer |SQL Server 2008 onwards|
-|Microsoft.EntityFrameworkCore.Sqlite |SQLite 3.7 onwards|
-|Microsoft.EntityFrameworkCore.InMemory |EF Core in-memory database|
-|Npgsql.EntityFrameworkCore.PostgreSQL |PostgreSQL|
-|Pomelo.EntityFrameworkCore.MySql |MySQL, MariaDB|
-|Pomelo.EntityFrameworkCore.MyCat |MyCAT Server|
-|EntityFrameworkCore.SqlServerCompact40 |SQL Server Compact 4.0|
-|EntityFrameworkCore.SqlServerCompact35 |SQL Server Compact 3.5|
-|MySql.Data.EntityFrameworkCore |MySQL|
-|FirebirdSql.EntityFrameworkCore.Firebird |Firebird 2.5 and 3.x|
-|EntityFrameworkCore.FirebirdSql |Firebird 2.5 and 3.x|
-|IBM.EntityFrameworkCore |Db2, Informix|
-|IBM.EntityFrameworkCore-lnx |Db2, Informix|
-|IBM.EntityFrameworkCore-osx |Db2, Informix|
-|Devart.Data.Oracle.EFCore |Oracle 9.2.0.4 onwards|
-|Devart.Data.PostgreSql.EFCore |PostgreSQL 8.0 onwards|
-|Devart.Data.SQLite.EFCore |SQLite 3 onwards|
-|Devart.Data.MySql.EFCore |MySQL 5 onwards|
-|EntityFrameworkCore.Jet |Microsoft Access files|
+<table >
+    <thead >
+        <tr>
+            <th scope="col">NuGet Package</th>
+            <th scope="col">Supported database engines</th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr>
+			<td>Microsoft.EntityFrameworkCore.SqlServer /td>
+			<td>SQL Server 2008 onwards </td>
+		</tr>
+		<tr>
+			<td>Microsoft.EntityFrameworkCore.Sqlite  </td>
+			<td>SQLite 3.7 onwards </td>
+		</tr>
+		<tr>
+			<td>Microsoft.EntityFrameworkCore.InMemory  </td>
+			<td>EF Core in-memory database  </td>
+		</tr>
+		<tr>
+			<td>Npgsql.EntityFrameworkCore.PostgreSQL  </td>
+			<td>PostgreSQL  </td>
+		</tr>
+		<tr>
+			<td>Pomelo.EntityFrameworkCore.MySql  </td>
+			<td>MySQL, MariaDB  </td>
+		</tr>
+		<tr>
+			<td>Pomelo.EntityFrameworkCore.MyCat  </td>
+			<td>MyCAT Server  </td>
+		</tr>
+		<tr>
+			<td>EntityFrameworkCore.SqlServerCompact40  </td>
+			<td>SQL Server Compact 4.0  </td>
+		</tr>
+		<tr>
+			<td>EntityFrameworkCore.SqlServerCompact35   </td>
+			<td>SQL Server Compact 3.5  </td>
+		</tr>
+		<tr>
+			<td>MySql.Data.EntityFrameworkCore  </td>
+			<td>MySQL  </td>
+		</tr>
+		<tr>
+			<td>FirebirdSql.EntityFrameworkCore.Firebird  </td>
+			<td>Firebird 2.5 and 3.x  </td>
+		</tr>
+		<tr>
+			<td>EntityFrameworkCore.FirebirdSql  </td>
+			<td>Firebird 2.5 and 3.x  </td>
+		</tr>
+		<tr>
+			<td>IBM.EntityFrameworkCore  </td>
+			<td>Db2, Informix  </td>
+		</tr>
+		<tr>
+			<td>IBM.EntityFrameworkCore-lnx   </td>
+			<td>Db2, Informix  </td>
+		</tr>
+		<tr>
+			<td>IBM.EntityFrameworkCore-osx  </td>
+			<td>Db2, Informix  </td>
+		</tr>
+		<tr>
+			<td>Devart.Data.Oracle.EFCore  </td>
+			<td>Oracle 9.2.0.4 onwards  </td>
+		</tr>
+		<tr>
+			<td>Devart.Data.PostgreSql.EFCore  </td>
+			<td>PostgreSQL 8.0 onwards  </td>
+		</tr>
+		<tr>
+			<td>Devart.Data.SQLite.EFCore  </td>
+			<td>SQLite 3 onwards  </td>
+		</tr>
+		<tr>
+			<td>Devart.Data.MySql.EFCore  </td>
+			<td>MySQL 5 onwards  </td>
+		</tr>
+		<tr>
+			<td>EntityFrameworkCore.Jet  </td>
+			<td>Microsoft Access files </td>
+		</tr>
+    </tbody>
+</table>

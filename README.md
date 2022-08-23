@@ -68,7 +68,9 @@ dotnet tool install --global dotnet-dev-certs
 </table>					
 								
 									
-								
+
+<h2>#Imports en VS CODE:  </h2>
+<img href="readmeIMG/importsVScode.png"/>		
  	
  							
 						
@@ -90,6 +92,7 @@ dotnet tool install --global dotnet-dev-certs
     <li>dotnet tool install --global dotnet-dev-certs</li>
 </ul>
 
+> dotnet new gitignore
 
 
 

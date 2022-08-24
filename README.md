@@ -70,7 +70,8 @@ dotnet tool install --global dotnet-dev-certs
 									
 
 <h2>#Imports en VS CODE:  </h2>
-<img href="readmeIMG/importsVScode.png"/>		
+<img href="readmeIMG/importsVScode.png"/>	
+(./readmeIMG/importsVScode.png)	
  	
  							
 						

@@ -2,6 +2,17 @@
 
 Se utilizara ADO.NET que es un conjunto de librerías para acceder a datos y servicios de datos.
 
+##Setup inicial
+Get the latest version of Omnisharp VS Code Settings.json file.
+~~~json
+"omnisharp.path": "latest"
+~~~
+
+**Windows** %APPDATA%\Code\User\settings.json
+**macOS** $HOME/Library/Application\ Support/Code/User/settings.json
+**Linux** $HOME/.config/Code/User/settings.json
+Reset all settings#
+
 ## Conexión a base de datos
 
 * ODBC
@@ -51,6 +62,10 @@ Para instalar EF Core, instale el paquete para los proveedores de bases de datos
 **Instalación para conectarnos con PostgreSQL**
 > dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 6.0.6
 
+**Certificados**
+> dotnet dev-certs https --clean
+> dotnet dev-certs https --trust
+
 ## ¿Qué es un ORM?
 
 ORM es la sigla para Object Relational Mapping. Se apoya en objetos y clases para realizar la representación del concepto a utilizar.
@@ -84,8 +99,7 @@ public class Categoria
     public string? Nombre {get;set;}
     public string? Descripcion {get;set;}
     public int Peso {get;set;}
-
-    [JsonIgnore]
+    
     public virtual ICollection<Tarea>? Tareas {get;set;}
 }
 ~~~
@@ -101,7 +115,8 @@ public class Tarea
     public Guid CategoriaId { get; set; }
     public Prioridad PrioridadTarea { get; set; }
     public DateTime FechaCreacion { get; set; }
-    public virtual Categoria? Categoria { get; set; }
+	[JsonIgnore]
+    public virtual Categoria Categoria { get; set; }
 
     public string? Resumen { get; set; }
     public string? Estado { get; set; }
@@ -138,20 +153,16 @@ Usar el siguiente link para buscar mas información: <https://docs.microsoft.com
 ~~~csharp
 public class Categoria
 {
-    [Key]
-    public Guid TareaId { get; set; }
-    [Required]
-    [MaxLength(200)]
-    public string? Titulo { get; set; }
-    public string? Descripcion { get; set; }
-    [ForeignKey("Categoria")] //llamados DataAnnotation 
+    //[Key]
     public Guid CategoriaId { get; set; }
-    public Prioridad PrioridadTarea { get; set; }
-    public DateTime FechaCreacion { get; set; }
-    public virtual Categoria? Categoria { get; set; }
-    [NotMapped]
-    public string? Resumen { get; set; }
-    public string? Estado { get; set; }
+    // [Required]
+    // [MaxLength(150)] 
+    public string Nombre { get; set; } 
+    public string Descripcion { get; set; }
+    public int Peso { get; set; }
+    // [ForeignKey("CategoriaId")]
+    public virtual ICollection<Tarea> Tareas {get;set;}
+
 }
 ~~~
 
@@ -160,16 +171,21 @@ public class Categoria
 ~~~csharp
 public class Tarea 
 {
+     // [Key]
     public Guid TareaId { get; set; }
-    public string? Titulo { get; set; }
-    public string? Descripcion { get; set; }
+    // [ForeignKey("CategoriaId")]
     public Guid CategoriaId { get; set; }
+    // [Required]
+    // [MaxLength(200)]
+    public string Titulo { get; set; }
+    public string Descripcion { get; set; }
+    // [Required]
     public Prioridad PrioridadTarea { get; set; }
     public DateTime FechaCreacion { get; set; }
-    public virtual Categoria? Categoria { get; set; }
-
-    public string? Resumen { get; set; }
-    public string? Estado { get; set; }
+    [JsonIgnore]
+    public virtual Categoria Categoria {get;set;}
+    // [NotMapped]
+    public string Resumen {get;set;}
 }
 ~~~
 
@@ -187,7 +203,7 @@ public class Tareas
 
 ayuda a verificar si toda la implementacion esta funcionando correctamente creando asi las tablas.
 
-Entonces se realizara las siguientes modifciaciones en el archivo program.cs
+Entonces se realizara las siguientes modificaciones en el archivo program.cs
 
 ~~~csharp
 using Microsoft.AspNetCore.Mvc;
@@ -202,11 +218,10 @@ var app = builder.Build();
 
 app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/dbconexion", async ([FromServices] TareasContext dbContext) => 
-{
+app.MapGet("/dbConexion", ([FromServices] TareasContext dbContext)=>{
     dbContext.Database.EnsureCreated();
-    return Results.Ok("Base de datos en memoria: " + dbContext.Database.IsInMemory());
-
+    return Results.Ok("Base de datos en memoria creada con exito: "+ dbContext.Database.IsInMemory()+
+                        "  ---  SQL Server Db Created: " + dbContext.Database.IsSqlServer());
 });
 
 app.Run();
@@ -220,6 +235,11 @@ Ejemplo de cadena de conexión para SQL server:
 
 ~~~csharp
 "Data Source=server;Initial Catalog=db;user id=sa; password=pass";
+~~~
+
+### Con seguridad de windows
+~~~Json
+"Data Source=(local); Initial Catalog= TareasDb;Trusted_Connection=True; Integrated Security=True"
 ~~~
 
 ### Configuración para PostgreSQL:
@@ -245,6 +265,10 @@ services.AddDbContext<HotelContextDB>(options => options.UseNpgsql(“Server=pos
 Server=postgreServer;Database=DbName;Port=5432;User Id=user;Password=password;
 ~~~
 
+### Para mysql seria:
+builder.Services.AddDbContext<TareasContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString(“SERVER”)));
+
+
 ## Agregando conexión al archivo appsettings
 
 abrir el archivo appsettings.json y hacer la siguiente configurarión
@@ -263,6 +287,8 @@ abrir el archivo appsettings.json y hacer la siguiente configurarión
   }
 }
 ~~~
+**Server en local seria:
+>  (local)\\SQLEXPRESS
 
 Hacer las siguientes configuracion en programa.cs
 
@@ -295,39 +321,38 @@ public class TareasContext: DbContext
     public DbSet<Tarea>? Tareas {get;set;}
 
     public TareasContext(DbContextOptions<TareasContext> options) :base(options) { }
-    /* Creating Fluint API, tiene mayor prioridad a los atributos de la clase Categoria */
+    
+	///Fluent API
+    ///Ahora comento los data notations en los modelos-- Se hace de una u de otra forma. No ambas
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //Fluent API que sirve para establecer las propiedades de las entidades
-        modelBuilder.Entity<Categoria>(
-            categoria =>
-            {
-                categoria.ToTable("Categoria");
-                categoria.HasKey(c => c.CategoriaId);
-                categoria.Property(c => c.Nombre).IsRequired().HasMaxLength(150);
-                categoria.Property(c => c.Descripcion).IsRequired(false);
-                categoria.Property(c => c.Peso);
-                categoria.HasData(categorias);
+        modelBuilder.Entity<Categoria>(categoria=>{
+            categoria.ToTable("Categoria");
+            categoria.HasKey(p=>p.CategoriaId);
+            categoria.Property(p=>p.Nombre).IsRequired().HasMaxLength(150);
+            ///Puedo especificar un nombre para la columna en la base de datos
+            categoria.Property(p=>p.Descripcion).HasColumnName("Description");
+        });
 
-            });
-
-
-        //Fluent API que sirve para establecer las propiedades de las entidades
-        modelBuilder.Entity<Tarea>(
-            tarea =>
-            {
-                tarea.ToTable("Tarea");
-                tarea.HasKey(t => t.TareaId);
-                tarea.HasOne(t => t.Categoria).WithMany(t => t.Tareas).HasForeignKey(t => t.CategoriaId);
-                tarea.Property(t => t.Titulo).IsRequired().HasMaxLength(200);
-                tarea.Property(t => t.Descripcion).IsRequired(false);
-                tarea.Property(t => t.FechaCreacion).HasDefaultValueSql("GETDATE()");
-                tarea.Property(t => t.PrioridadTarea);
-                tarea.Ignore(t => t.Resumen);
-                tarea.Ignore(t => t.Estado);
-                tarea.HasData(tareasInit);
-            });
-    }
+        modelBuilder.Entity<Tarea>(tarea =>
+        {
+            // indica que es una tabla
+            tarea.ToTable("tarea");
+            // indica que es la clave primaria
+            tarea.HasKey(t => t.TareaId);            
+            // indica que una tarea tiene una categoria y una categoria tiene muchas tareas
+            tarea.HasOne(t => t.Categoria).WithMany(c => c.Tareas).HasForeignKey(t => t.CategoriaId); 
+            // indica que es un campo obligatorio y su tamaño máximo es 200
+            tarea.Property(t => t.Titulo).IsRequired().HasMaxLength(200); 
+            // indica que es un campo opcional
+            tarea.Property(t => t.Descripcion);      
+            // indica que es un campo con una conversión de tipo enumerado
+            tarea.Property(t => t.PrioridadTarea).IsRequired().HasConversion(  
+                v => v.ToString(),
+                v => (Prioridad)Enum.Parse(typeof(Prioridad), v));
+            // ignora la propiedad en la base de datos
+            tarea.Ignore(t=>t.Resumen);
+        });
 }
 
 ~~~
@@ -338,14 +363,16 @@ public class TareasContext: DbContext
 
 * <https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key>
 
-## ¿Qué son las migraciones?
+* <https://www.tutorialspoint.com/entity_framework/entity_framework_fluent_api.htm#:~:text=Fluent%20API%20is%20an%20advanced,not%20possible%20with%20data%20annotations>
+
+# ¿Qué son las migraciones?
 
 ![migraciones](./imgs/migraciones.png)
 
 ![comandos](./imgs/migraciones-comandos.png)
 
 ## Inicializar las migraciones
-
+<https://docs.microsoft.com/en-us/ef/core/cli/dotnet>
 
 **Comando para instalar la herramienta de EF:**
 
@@ -366,110 +393,131 @@ Cada vez que agreguemos una migración debemos usar el comando:
 
 > dotnet ef database update
 
+**IMPORTANTE -- PostgreSQL**
+Usarlo justo despues de los using en el archivo de DbContext
+> AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+
 ## Agregando datos semilla
 
 Crear objetos y agregar datos a las propiedades de la clase Categoria y tarea en la clase TareasContext.cs
 
 ~~~csharp
-public class TareasContext: DbContext
-{
-    public DbSet<Categoria>? Categorias {get;set;}
-    public DbSet<Tarea>? Tareas {get;set;}
+using Microsoft.EntityFrameworkCore;
+using proyectoEF.Models;
 
-    public TareasContext(DbContextOptions<TareasContext> options) :base(options) { }
+
+namespace proyectoEF;
+
+public class TareasContext : DbContext
+{
+    public DbSet<Categoria> Categorias {get;set;}
+    public DbSet<Tarea> Tareas { get; set; }
+    public TareasContext(DbContextOptions<TareasContext> options) : base(options){}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        List<Categoria> categorias = new List<Categoria>();
-        categorias.Add(new Categoria 
-        { 
-            CategoriaId = Guid.Parse("e2c610a2-ce8e-4ad7-ab9c-7a408c8b61ac"), 
-            Nombre = "Actividades pendientes", 
-            Peso = 20
-        });
-        categorias.Add(new Categoria 
-        { 
-            CategoriaId = Guid.Parse("e2c610a2-ce8e-4ad7-ab9c-7a408c8b61ae"), 
-            Nombre = "Actividades personales",
-            Peso = 50
-        });
-
-        modelBuilder.Entity<Categoria>(
-            categoria =>
+        List<Categoria> categoriasInit = new List<Categoria>(){
+            new Categoria()
             {
-                categoria.ToTable("Categoria");
-                categoria.HasKey(c => c.CategoriaId);
-                categoria.Property(c => c.Nombre).IsRequired().HasMaxLength(150);
-                categoria.Property(c => c.Descripcion).IsRequired(false);
-                categoria.Property(c => c.Peso);
-                categoria.HasData(categorias);
-
-            });
-
-        List<Tarea> tareasInit = new List<Tarea>();
-        tareasInit.Add(new Tarea() { 
-            TareaId = Guid.Parse("fe2de405-c38e-4c90-ac52-da0540dfb410"), 
-            CategoriaId = Guid.Parse("e2c610a2-ce8e-4ad7-ab9c-7a408c8b61ac"),
-            PrioridadTarea = Prioridad.Media, 
-            Titulo = "Pago de servicios publicos", 
-            FechaCreacion = DateTime.Now
-            });
-        tareasInit.Add(new Tarea() 
-        { 
-            TareaId = Guid.Parse("fe2de405-c38e-4c90-ac52-da0540dfb411"), 
-            CategoriaId = Guid.Parse("e2c610a2-ce8e-4ad7-ab9c-7a408c8b61ae"),
-            PrioridadTarea = Prioridad.Baja, 
-            Titulo = "Terminar de ver pelicula en netflix", 
-            FechaCreacion = DateTime.Now
-            });
-        
-        modelBuilder.Entity<Tarea>(
-            tarea =>
+                CategoriaId = Guid.Parse("2d143e08-b275-425a-b3b0-a3a747ca9834"),
+                Nombre = "Actividades pendientes",
+                Peso=20
+            },
+            new Categoria()
             {
-                tarea.ToTable("Tarea");
-                tarea.HasKey(t => t.TareaId);
-                tarea.HasOne(t => t.Categoria).WithMany(t => t.Tareas).HasForeignKey(t => t.CategoriaId);
-                tarea.Property(t => t.Titulo).IsRequired().HasMaxLength(200);
-                tarea.Property(t => t.Descripcion).IsRequired(false);
-                tarea.Property(t => t.FechaCreacion).HasDefaultValueSql("GETDATE()");
-                tarea.Property(t => t.PrioridadTarea);
-                tarea.Ignore(t => t.Resumen);
-                tarea.Ignore(t => t.Estado);
-                tarea.HasData(tareasInit);
-            });
+                CategoriaId = Guid.Parse("df94fd47-243b-4a8b-a438-41734bae8e2d"),
+                Nombre = "Actividades Personales",
+                Peso=50
+            },
+        };
+
+        modelBuilder.Entity<Categoria>(categoria=>{
+            categoria.ToTable("Categoria");
+            categoria.HasKey(p=>p.CategoriaId);
+            categoria.Property(p=>p.Nombre).IsRequired().HasMaxLength(150);
+            categoria.Property(p=>p.Descripcion).HasColumnName("Description").IsRequired(false);
+            categoria.Property(p=> p.Peso);
+
+            categoria.HasData(categoriasInit);
+        });
+
+        List<Tarea> tareasInit = new List<Tarea>(){
+            new Tarea(){
+                TareaId = Guid.Parse("f2777a32-663c-4b32-b20c-24170523b98a"),
+                CategoriaId = Guid.Parse("2d143e08-b275-425a-b3b0-a3a747ca9834"),
+                Titulo = "Comprar leche y huevos",
+                PrioridadTarea = Prioridad.Media
+            },
+            new Tarea(){
+                TareaId = Guid.Parse("f2777a32-663c-4b32-b20c-24170523b98b"),
+                CategoriaId = Guid.Parse("2d143e08-b275-425a-b3b0-a3a747ca9834"),
+                Titulo = "Pedir una Micro SD en Amazon",
+                PrioridadTarea = Prioridad.Media
+            },
+
+            new Tarea(){
+                TareaId = Guid.Parse("f2777a32-663c-4b32-b20c-24170523b98c"),
+                CategoriaId = Guid.Parse("df94fd47-243b-4a8b-a438-41734bae8e2d"),
+                Titulo = "Revisar Compra de laptop, llega mañana",
+                PrioridadTarea = Prioridad.Alta
+            },
+            new Tarea(){
+                TareaId = Guid.Parse("f2777a32-663c-4b32-b20c-24170523b98d"),
+                CategoriaId = Guid.Parse("df94fd47-243b-4a8b-a438-41734bae8e2d"),
+                Titulo = "Terminar Curso de ASP Net",
+                PrioridadTarea = Prioridad.Alta
+            },
+
+        };
+
+        modelBuilder.Entity<Tarea>(tarea =>
+        {
+            tarea.ToTable("tarea");
+            tarea.HasKey(t => t.TareaId);            
+            tarea.HasOne(t => t.Categoria).WithMany(c => c.Tareas).HasForeignKey(t => t.CategoriaId); 
+            tarea.Property(t => t.Titulo).IsRequired().HasMaxLength(200); 
+            tarea.Property(t => t.Descripcion).IsRequired(false);      
+            tarea.Property(t => t.PrioridadTarea).IsRequired().HasConversion(  
+                v => v.ToString(),
+                v => (Prioridad)Enum.Parse(typeof(Prioridad), v)).HasMaxLength(10);
+            
+            tarea.Ignore(t=>t.Resumen);
+            tarea.Property(t=>t.FechaCreacion).HasDefaultValue(DateTime.Now);
+            tarea.HasData(tareasInit);
+        });
     }
 }
 ~~~
 
 ## Obteniendo datos con Entity Framework
+https://docs.microsoft.com/en-us/aspnet/core/tutorials/min-web-api?view=aspnetcore-6.0&tabs=visual-studio
+
+**Cuidado si necesitas un [JsonIgnore]*
 
 Creando el end point Get
 
+**GET**
 ~~~csharp
-app.MapGet(
-    "/api/tareas", 
-    ([FromServices] TareasContext dbContext) =>
+app.MapGet("/api/tareas", async ([FromServices] TareasContext dbContext) =>
 {
-    var tareas = dbContext.Tareas;
-    return Results.Ok(tareas?.Include(t=>t.Categoria));
-    //tareas.Where(t=>t.PrioridadTarea == proyectoef.Models.Prioridad.Media
-    
+    return Results.Ok(dbContext.Tareas.OrderBy(t=>t.PrioridadTarea).Include(t=>t.Categoria));
 });
 
-
-app.MapGet(
-    "/api/categorias", 
-    ([FromServices] TareasContext dbContext) =>
-{
-    var categorias = dbContext.Categorias;
-    return Results.Ok(categorias?.Where(c=>c.Nombre == "Actividades pendientes"));
+app.MapGet("/api/categorias", ([FromServices] TareasContext dbContext)=>{
+    return Results.Ok(dbContext.Categorias);
 });
+
+app.MapGet("/api/categorias2", ([FromServices] TareasContext dbContext)=>{
+    return Results.Ok(dbContext.Categorias.Include(c=>c.Tareas));
+});
+
 ~~~
 
 ## Guardando datos con Entity framework
 
 Creando el end point Post:
-
+**POST**
 ~~~csharp
 app.MapPost(
     "/api/tareas", 
@@ -490,7 +538,7 @@ app.MapPost(
 ## Actualizando datos con Entity framework
 
 Creando el end point Put:
-
+**PUT**
 ~~~csharp
 app.MapPut(
     "/api/tareas/{id}", 

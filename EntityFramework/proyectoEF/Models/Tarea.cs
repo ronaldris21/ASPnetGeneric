@@ -2,25 +2,26 @@ using System.Security.AccessControl;
 using System.Runtime.ConstrainedExecution;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace proyectoEF.Models;
 
 public class Tarea
 {
-    [Key]
+    // [Key]
     public Guid TareaId { get; set; }
-    [ForeignKey("CategoriaId")]
+    // [ForeignKey("CategoriaId")]
     public Guid CategoriaId { get; set; }
-    [Required]
-    [MaxLength(200)]
+    // [Required]
+    // [MaxLength(200)]
     public string Titulo { get; set; }
     public string Descripcion { get; set; }
-    [Required]
+    // [Required]
     public Prioridad PrioridadTarea { get; set; }
     public DateTime FechaCreacion { get; set; }
-
+    [JsonIgnore]
     public virtual Categoria Categoria {get;set;}
-    [NotMapped]
+    // [NotMapped]
     public string Resumen {get;set;}
 
 
